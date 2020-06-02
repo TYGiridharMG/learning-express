@@ -1,0 +1,54 @@
+{{#if hasProduct}}
+<div class="col-md-10 offset-md-1">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Company</th>
+                <th>Price</th>
+                {{#if isLoggedIn}}
+                {{#if isAdmin}}
+                <th>Delete</th>
+                <th>Edit</th>
+                {{else}}
+                <th>Add to Cart</th>
+                {{/if}}
+                {{/if}}
+            </tr>
+        </thead>
+        {{#if isLoggedIn}}
+        {{#if isAdmin}}
+        {{#each products}}
+        <tbody>
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.company}}</td>
+                <td>{{this.price}}</td>
+                <td><a class="btn btn-danger" href="/admin/delete/{{this.name}}">Delete</a></td>
+                <td><a class="btn btn-danger" href="/admin/edit?name={{this.name}}">Edit</a></td>
+            </tr>
+        </tbody>
+        {{/each}}
+        {{else}}
+        {{#each products}}
+        <tbody>
+            <tr>
+                <td>{{this.name}}</td>
+                <td>{{this.category}}</td>
+                <td>{{this.company}}</td>
+                <td>{{this.price}}</td>
+                <td><a class="btn btn-danger" href="/shop/add-to-cart?name={{this.name}}">Add to Cart</a></td>
+            </tr>
+        </tbody>
+        {{/each}}
+        {{/if}}
+        {{/if}}
+    </table>
+</div>
+{{ else }}
+<div>
+    <h1>No Product Found</h1>
+</div>
+{{/if}}

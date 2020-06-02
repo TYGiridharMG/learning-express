@@ -1,0 +1,34 @@
+<form action="./search" method="get" class="form-group col-md-5 offset-md-4">
+    <div>
+        <input type="text" name="name" class="form-control float-left col-md-7" placeholder="Enter to Search">
+        <button type="submit" class="btn btn-primary ml-4">Search</button>
+    </div>
+</form>
+{{#if hasProduct}}
+    {{#each products }}
+    <div class="float-left m-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">{{this.name}}</h3>
+            </div>
+            <div class="card-body">
+                <p class="card-text">Category: {{this.category}}</p>
+                <p class="card-text">Company: {{this.company}}</p>
+            </div>
+            <div class="card-footer">
+                <p class="card-text">Cost: {{this.price}}</p>
+                {{#if isAdmin}}
+                <a class="btn btn-danger" href="/admin/delete/{{this.name}}">Delete</a>
+                <a class="btn btn-danger" href="/admin/edit?name={{this.name}}">Edit</a>
+                {{else}}
+                <a class="btn btn-danger" href="/shop/cart?name={{this.name}}">Add to Cart</a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    {{/each}}
+{{ else }}
+<div>
+    <h1>No Product Found</h1>
+</div>
+{{/if}}

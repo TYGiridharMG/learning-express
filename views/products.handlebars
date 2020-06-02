@@ -1,0 +1,28 @@
+{{#if hasProduct}}
+<div>
+    <div class="row">
+        <div class="col-xs-1-12">
+            {{#each products }}
+            <div class="card float-left m-4">
+                <div class="card-body">
+                    <h3 class="card-title">{{this.name}}</h3>
+                    <p class="card-text">{{this.category}}</p>
+                    <p class="card-text">{{this.company}}</p>
+                    <p class="card-footer">{{this.price}}</p>
+                    {{#if isAdmin}}
+                    <p><a class="btn btn-danger" href="/admin/delete/{{this.name}}">Delete</a></p>
+                    <p><a class="btn btn-danger" href="/admin/edit?name={{this.name}}">Edit</a></p>
+                    {{else}}
+                    <p><a class="btn btn-danger" href="/shop/cart?name={{this.name}}">Add to Cart</a></p>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+</div>
+{{else}}
+<div>
+    <h1>No Product Found</h1>
+</div>
+{{/if}}
